@@ -42,11 +42,13 @@ def won?(board)
   return false
 end
 
-def full? (board)
-  board.all? { |i| i == "X" || i == "O"  }
+def full?(board)
+  board.all? do |win_index_1|
+     win_index_1 == "X" || win_index_1 == "O"
+   end
 end
 
-def draw? (board)
+def draw?(board)
   if !won?(board) && full?(board)
     return true
   else
@@ -54,27 +56,21 @@ def draw? (board)
   end
 end
 
-def over? (board)
-  if draw?(board)
+def over?(board)
+  if won?(board) || full?(board) || draw?(board)
     return true
-  elsif won?(board) && full?(board)
-    return true
-  elsif won?(board) && !full?(board)
-    return true
+  else
+    return false
   end
 end
 
-def winner (board)
-  win = []
-  win = won?(board)
-  if win == false
+def winner(board)
+  if won?(board) == false
     return nil
+  elsif board[won?(board)[0]] == "X"
+    return "X"
   else
-    if board[win[0]] == "X"
-      return "X"
-    else
-      return "O"
-    end
+    return "O"
   end
 end
 
