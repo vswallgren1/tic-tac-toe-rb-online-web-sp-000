@@ -24,22 +24,22 @@ def position_taken?(board, index)
 end
 
 def won?(board)
-      WIN_COMBINATIONS.each {|n|
-        index1 = n[0]
-        index2 = n[1]
-        index3 = n[2]
+  WIN_COMBINATIONS.each do |win_combination|
+    win_index_1 = win_combination[0]
+    win_index_2 = win_combination[1]
+    win_index_3 = win_combination[2]
 
-        position1 = board[index1]
-        position2 = board[index2]
-        position3 = board[index3]
+    position_1 = board[win_index_1]
+    position_2 = board[win_index_2]
+    position_3 = board[win_index_3]
 
-        if position1 == "X" && position2 == "X" && position3 == "X"
-          return n
-        elsif position1 == "O" && position2 == "O" && position3 == "O"
-          return n
-        end
-      }
-      return false
+    if position_1 == "X" && position_2 == "X" && position_3 == "X"
+      return win_combination
+    elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
+      return win_combination
+    end
+  end
+  return false
 end
 
 def full? (board)
